@@ -1,0 +1,25 @@
+---
+- name: Ansible Play for Create IBM Cloud Virtual Server instance attached to Virtual Network Interface (VNI) with VPC networking
+  hosts: localhost
+  gather_facts: false
+
+  collections:
+    - ibm.cloudcollection
+    
+  tasks:
+
+    - name: Identify Resource Group info
+      ibm.cloudcollection.ibm_resource_group_info:
+        name: "{{ ibmcloud_resource_group_name }}"
+        ibmcloud_api_key: "{{ ibmcloud_api_key }}"
+      register: ibmcloud_resource_group
+
+    - name: Create Virtual Private Cloud (VPC) network
+      ibm.cloudcollection.ibm_is_vpc:
+        name: "{{ ibmcloud_vpc_name }}"
+        resource_group: "{{ ibmcloud_resource_group.resource.id }}"
+        state: available
+        id: "{{ ibmcloud_vpc.resource.id | default(omit) }}"
+        ibmcloud_api_key: "{{ ibmcloud_api_key }}"
+        region: "{{ ibmcloud_region }}"
+      register: ibmcloud_vpc_create
