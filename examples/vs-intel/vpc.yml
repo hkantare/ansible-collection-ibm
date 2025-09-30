@@ -2,12 +2,8 @@
 - name: Ansible Play for Create IBM Cloud Virtual Server instance attached to Virtual Network Interface (VNI) with VPC networking
   hosts: localhost
   gather_facts: false
-
-  collections:
-    - ibm.cloudcollection
     
   tasks:
-
     - name: Identify Resource Group info
       ibm.cloudcollection.ibm_resource_group_info:
         name: "{{ ibmcloud_resource_group_name }}"
