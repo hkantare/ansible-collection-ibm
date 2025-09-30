@@ -5,13 +5,13 @@
     
   tasks:
     - name: Identify Resource Group info
-      ibm.cloudcollection.ibm_resource_group_info:
+      ibm_resource_group_info:
         name: "{{ ibmcloud_resource_group_name }}"
         ibmcloud_api_key: "{{ ibmcloud_api_key }}"
       register: ibmcloud_resource_group
 
     - name: Create Virtual Private Cloud (VPC) network
-      ibm.cloudcollection.ibm_is_vpc:
+      ibm_is_vpc:
         name: "{{ ibmcloud_vpc_name }}"
         resource_group: "{{ ibmcloud_resource_group.resource.id }}"
         state: available
