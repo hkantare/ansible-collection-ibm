@@ -1,3 +1,4 @@
   collections:
-    - ibm.cloudcollection@1.51.1
+    - name: ibm.cloudcollection
+      version: "1.51.1"
     
